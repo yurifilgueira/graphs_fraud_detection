@@ -39,10 +39,10 @@ public class SuspicionPipeline {
                 case "3":
                     selectedFile = "full_dataset.csv";
                     break;
-                case "4": // Nova Opção
+                case "4":
                     selectedFile = "small_not_fraud_dataset.csv";
                     break;
-                case "5": // Opção Sair atualizada
+                case "5":
                     System.out.println("Saindo do programa. Até mais!");
                     return;
                 default:
@@ -68,8 +68,8 @@ public class SuspicionPipeline {
         System.out.println("1. Dataset com Fraudes (fraud_dataset.csv)");
         System.out.println("2. Dataset sem Fraudes (not_fraud_dataset.csv)");
         System.out.println("3. Dataset Completo (full_dataset.csv)");
-        System.out.println("4. Dataset Pequeno sem Fraudes (small_not_fraud_dataset.csv)"); // Nova Opção
-        System.out.println("5. Sair"); // Opção Sair atualizada
+        System.out.println("4. Dataset Pequeno sem Fraudes (small_not_fraud_dataset.csv)");
+        System.out.println("5. Sair");
         System.out.print("Escolha uma opção: ");
     }
 
@@ -410,7 +410,6 @@ class CommunityDetector {
             if(removedNodes.contains(v)) continue;
             removedNodes.add(v);
 
-            // Itera sobre os vizinhos para atualizar seus graus
             for (String neighbor : adj.getOrDefault(v, Collections.emptySet())) {
                 if (!removedNodes.contains(neighbor)) {
                     degrees.put(neighbor, degrees.get(neighbor) - 1);
@@ -421,10 +420,8 @@ class CommunityDetector {
             }
         }
 
-        // Remove os nós "podados" do grafo original
         adj.keySet().removeAll(removedNodes);
 
-        // Gera suspeição para cada nó restante na comunidade
         List<Suspicion> res = new ArrayList<>();
         if (!adj.isEmpty()) {
             Set<String> community = adj.keySet();
